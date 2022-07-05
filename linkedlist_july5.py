@@ -3,61 +3,128 @@ class Node:
        self.data = data
        self.next = None
  
-#this class is for creating a linked list
-class Linkedlist:
+ 
+class LinkedList:
     def __init__(self):
         self.head = None
-        self.last_node = None
  
-    def append(self, data):
-        if self.last_node is None:
-            self.head = Node(data)
-            self.last_node = self.head
+    def get_prev_node(self, ref_node):
+        current = self.head
+        while (current and current.next != ref_node):
+            current = current.next
+        return current
+ 
+    def duplicate(self):
+        copy = LinkedList()
+        current = self.head
+        while current:
+            node = Node(current.data)
+            copy.insert_at_end(node)
+            current = current.next
+        return copy
+ 
+    def insert_at_end(self, new_node):
+        if self.head is None:
+            self.head = new_node
         else:
-            self.last_node.next = Node(data)
-            self.last_node = self.last_node.next
+            current = self.head
+            while current.next is not None:
+                current = current.next
+            current.next = new_node
+ 
+    def remove(self, node):
+        prev_node = self.get_prev_node(node)
+        if prev_node is None:
+            self.head = self.head.next
+        else:
+            prev_node.next = node.next
+ 
+    def display(self):
+        current = self.head
+        while current:
+            print(current.data, end = ' ')
+            current = current.next
+ 
+ 
+def remove_duplicates(llist):
+    current1 = llist.head
+    while current1:
+        current2 = current1.next
+        data = current1.data
+        while current2:
+            temp = current2
+            current2 = current2.next
+            if temp.data == data:
+                llist.remove(temp)
+        current1 = current1.next
  
 # Elements that are common in linkedlist llist1 and llist2.
-def common_element(llist1, llist2):
+def find_union(llist1, llist2):
+    if llist1.head is None:
+        union = llist2.duplicate()
+        remove_duplicates(union)
+        return union
+    if llist2.head is None:
+        union = llist1.duplicate()
+        remove_duplicates(union)
+        return union
+ 
+    union = llist1.duplicate()
+    last_node = union.head
+    while last_node.next is not None:
+        last_node = last_node.next
+    llist2_copy = llist2.duplicate()
+    last_node.next = llist2_copy.head
+    remove_duplicates(union)
+ 
+    return union
+ 
+ 
+#contains all elements of l1 as well as l2 ensuring that there is no repeation of elements.
+def find_intersection(llist1, llist2):
+    if (llist1.head is None or llist2.head is None):
+        return LinkedList()
+ 
+    intersection = LinkedList()
     current1 = llist1.head
     while current1:
-        data = current1.data
         current2 = llist2.head
+        data = current1.data
         while current2:
-            if data == current2.data:
-                return data
+            if current2.data == data:
+                node = Node(data)
+                intersection.insert_at_end(node)
+                break
             current2 = current2.next
         current1 = current1.next
-    return None
-
-llist1 = Linkedlist()
-llist2 = Linkedlist()
-
+    remove_duplicates(intersection)
+ 
+    return intersection
+ 
+ 
+a_llist1 = LinkedList()
+a_llist2 = LinkedList()
 
 data_list1 = [3,7,10,15,16,9,22,17,32,3]
-#Inserting element to a first linked list. 
+# data_list = input('Please enter the elements in the first linked list: ').split()
 for data in data_list1:
-    llist1.append(int(data))
-
+    node = Node(int(data))
+    a_llist1.insert_at_end(node)
 data_list2 = [16,2,9,13,37,8,10,1,28,2]
-#Inserting element to a second linked list.
+# data_list = input('Please enter the elements in the second linked list: ').split()
 for data in data_list2:
-    llist2.append(int(data))
-
-#Calling function by passing parameter 
-common = common_element(llist1, llist2)
-
-if common:
-    print('The two lists haveing common elements are {}.'.format(common))
-else:
-    print('The two lists have no common elements.')
-    
-#contains all elements of l1 as well as l2 ensuring that there is no repeation of elements.
-for x in data_list2:
-  data_list1.append(x)
-
-print(data_list1)
-
-print('After concatinating 2 list with out duplicate value' ,list(set(data_list1)))    
+    node = Node(int(data))
+    a_llist2.insert_at_end(node)
     
     
+
+ 
+union = find_union(a_llist1, a_llist2)
+intersection = find_intersection(a_llist1, a_llist2)
+ 
+print('Their union: ')
+union.display()
+print()
+print('Their intersection: ')
+intersection.display()
+print()
