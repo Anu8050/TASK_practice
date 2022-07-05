@@ -3,7 +3,7 @@ class Node:
        self.data = data
        self.next = None
  
- 
+#this class is for creating a linked list
 class LinkedList:
     def __init__(self):
         self.head = None
@@ -105,20 +105,19 @@ def find_intersection(llist1, llist2):
 a_llist1 = LinkedList()
 a_llist2 = LinkedList()
 
+#Inserting element to a first linked list. 
 data_list1 = [3,7,10,15,16,9,22,17,32,3]
-# data_list = input('Please enter the elements in the first linked list: ').split()
 for data in data_list1:
     node = Node(int(data))
     a_llist1.insert_at_end(node)
+    
+#Inserting element to a second linked list. 
 data_list2 = [16,2,9,13,37,8,10,1,28,2]
-# data_list = input('Please enter the elements in the second linked list: ').split()
 for data in data_list2:
     node = Node(int(data))
     a_llist2.insert_at_end(node)
-    
-    
 
- 
+#Calling function by passing parameter 
 union = find_union(a_llist1, a_llist2)
 intersection = find_intersection(a_llist1, a_llist2)
  
