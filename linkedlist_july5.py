@@ -30,15 +30,9 @@ def first_common(llist1, llist2):
         current1 = current1.next
     return None
 
-
 llist1 = Linkedlist()
-print(llist1)
-for i in enumarate(llist1):
-    print(i)
 llist2 = Linkedlist()
-print('---------')
-print(llist2)
- 
+
 data_list1 = [3,7,10,15,16,9,22,17,32,3]
 for data in data_list1:
     llist1.append(int(data))
@@ -62,3 +56,25 @@ print(data_list1)
 
 print('After concatinating 2 list with out duplicate value' ,list(set(data_list1)))    
     
+    
+    
+class Solution:
+    def solve(self, L1, L2):
+        if not L1:
+            return L2
+        if not L2:
+            return L1
+        
+        
+        # if L1.head < L2.head:
+        #     res = L1
+        #     res.next = self.solve(L1.next, L2)
+        # elif L2 < L1:
+        #     res = L2
+        #     res.next = self.solve(L2.next, L1)
+        # else:
+        #     res = L1
+        #     res.next = self.solve(L1.next, L2.next)
+        return 
+ob = Solution()
+print(ob.solve(llist1, llist2))
