@@ -3,17 +3,19 @@ class Node:
        self.data = data
        self.next = None
  
-#this class is for creating a linked list
+#this class is for creating a linked list.
 class LinkedList:
     def __init__(self):
         self.head = None
- 
+        
+    #for getting previous node.
     def get_prev_node(self, ref_node):
         current = self.head
         while (current and current.next != ref_node):
             current = current.next
         return current
- 
+    
+    #getting duplicate element in linked list.
     def duplicate(self):
         copy = LinkedList()
         current = self.head
@@ -22,7 +24,8 @@ class LinkedList:
             copy.insert_at_end(node)
             current = current.next
         return copy
- 
+    
+    #inserting element at the end of linked list.
     def insert_at_end(self, new_node):
         if self.head is None:
             self.head = new_node
@@ -32,6 +35,7 @@ class LinkedList:
                 current = current.next
             current.next = new_node
  
+    #removing unwanted elements in linked list.
     def remove(self, node):
         prev_node = self.get_prev_node(node)
         if prev_node is None:
@@ -39,13 +43,14 @@ class LinkedList:
         else:
             prev_node.next = node.next
  
+    #display elements in linked list.
     def display(self):
         current = self.head
         while current:
             print(current.data, end = ' ')
             current = current.next
  
- 
+# removing duplicate element in a linked list.
 def remove_duplicates(llist):
     current1 = llist.head
     while current1:
