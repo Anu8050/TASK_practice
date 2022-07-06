@@ -62,8 +62,7 @@ def remove_duplicates(llist):
             if temp.data == data:
                 llist.remove(temp)
         current1 = current1.next
- 
-# Elements that are common in linkedlist llist1 and llist2.
+#contains all elements of l1 as well as l2 ensuring that there is no repeation of elements.
 def find_union(llist1, llist2):
     if llist1.head is None:
         union = llist2.duplicate()
@@ -85,7 +84,7 @@ def find_union(llist1, llist2):
     return union
  
  
-#contains all elements of l1 as well as l2 ensuring that there is no repeation of elements.
+# Elements that are common in linkedlist llist1 and llist2.
 def find_intersection(llist1, llist2):
     if (llist1.head is None or llist2.head is None):
         return LinkedList()
